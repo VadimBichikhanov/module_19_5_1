@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block pagename %}Магазин{% endblock %}
+
+{% block content %}
+<h2>Магазин</h2>
+<p>Это страница магазина.</p>
+<ul class="list-group">
+    {% for product in products %}
+        <li class="list-group-item">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid" style="max-width: 100px;">
+            <h3>{{ product.name }}</h3>
+            <p>Цена: ${{ product.price }}</p>
+            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary" aria-label="Купить {{ product.name }}">Купить</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% if messages %}
+    <div class="messages mt-3">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}

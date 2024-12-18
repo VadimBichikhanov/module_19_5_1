@@ -1,0 +1,24 @@
+<!-- templates/choice_page.html -->
+{% extends 'base.html' %}
+
+{% block pagename %}Выбор действия{% endblock %}
+
+{% block content %}
+<h2>Выберите действие:</h2>
+<ul class="list-group">
+    <li class="list-group-item">
+        <a href="{% url 'sign_up_by_html' %}" class="btn btn-primary" aria-label="Зарегистрироваться">Зарегистрироваться</a>
+    </li>
+    <li class="list-group-item">
+        <a href="{% url 'login' %}" class="btn btn-secondary" aria-label="Войти">Войти</a>
+    </li>
+</ul>
+
+{% if messages %}
+    <div class="messages mt-3">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}

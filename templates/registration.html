@@ -1,0 +1,20 @@
+<!-- templates/registration.html -->
+{% extends 'base.html' %}
+
+{% block pagename %}Регистрация{% endblock %}
+
+{% block content %}
+    <h2>Регистрация</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+
+    <h3>Зарегистрированные покупатели:</h3>
+    <ul>
+        {% for buyer in buyers %}
+            <li>{{ buyer.name }} - Баланс: {{ buyer.balance }}, Возраст: {{ buyer.age }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

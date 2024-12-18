@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block pagename %}Главная!{% endblock %}
+
+{% block content %}
+    <h2>Добро пожаловать на главную страницу!</h2>
+
+    <!-- Список зарегистрированных покупателей -->
+    <section>
+        <h3>Зарегистрированные покупатели:</h3>
+        {% if buyers %}
+            <ul>
+                {% for buyer in buyers %}
+                    <li aria-label="Покупатель: {{ buyer.name }}, Баланс: {{ buyer.balance }}, Возраст: {{ buyer.age }}">
+                        {{ buyer.name }} - Баланс: {{ buyer.balance }}, Возраст: {{ buyer.age }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Покупателей пока нет. Добавьте первого покупателя!</p>
+        {% endif %}
+    </section>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Список новостей{% endblock %}
+
+{% block header %}Список новостей{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Список новостей</h2>
+    {% if news_items %}
+        <ul class="list-group">
+            {% for news_item in news_items %}
+                <li class="list-group-item">
+                    <h3>{{ news_item.title }}</h3>
+                    <p>{{ news_item.content }}</p>
+                    <p><small>Дата: {{ news_item.date }}</small></p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Новостей пока нет. Добавьте первую новость!</p>
+    {% endif %}
+</section>
+
+<!-- Пагинация -->
+<div class="pagination justify-content-center">
+    <span class="step-links">
+        {% if news_items.has_previous %}
+            <a href="?page=1" class="btn btn-outline-primary" aria-label="Первая страница">&laquo; первая</a>
+            <a href="?page={{ news_items.previous_page_number }}" class="btn btn-outline-primary" aria-label="Предыдущая страница">предыдущая</a>
+        {% endif %}
+
+        <span class="current" aria-current="page">
+            Страница {{ news_items.number }} из {{ news_items.paginator.num_pages }}.
+        </span>
+
+        {% if news_items.has_next %}
+            <a href="?page={{ news_items.next_page_number }}" class="btn btn-outline-primary" aria-label="Следующая страница">следующая</a>
+            <a href="?page={{ news_items.paginator.num_pages }}" class="btn btn-outline-primary" aria-label="Последняя страница">последняя &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% if messages %}
+    <div class="messages mt-3">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,19 @@
+<!-- templates/login_page.html -->
+{% extends 'base.html' %}
+
+{% block pagename %}Вход{% endblock %}
+
+{% block content %}
+    <h2>Вход</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Войти</button>
+    </form>
+    {% if success_message %}
+        <p style="color: green;">{{ success_message }}</p>
+    {% endif %}
+    {% if form.errors %}
+        <p style="color: red;">Неверный логин или пароль</p>
+    {% endif %}
+{% endblock %}

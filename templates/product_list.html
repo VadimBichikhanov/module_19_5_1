@@ -1,0 +1,18 @@
+<!-- templates/product_list.html -->
+{% extends 'base.html' %}
+
+{% block pagename %}Список товаров{% endblock %}
+
+{% block content %}
+    <h2>Список товаров</h2>
+    <ul>
+        {% for game in games %}
+            <li>
+                <h3>{{ game.title }}</h3>
+                <p>{{ game.description }}</p>
+                <p>Стоимость: {{ game.cost }}</p>
+                <a href="#" class="btn btn-primary">Купить</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

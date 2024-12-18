@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block pagename %}Добавить новость{% endblock %}
+
+{% block content %}
+<h1>Добавить новость</h1>
+<section>
+    <h2>Форма для добавления новости</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.title.id_for_label }}" class="form-label">Заголовок:</label>
+            {{ form.title }}
+            {% if form.title.errors %}
+                <div class="error" aria-describedby="{{ form.title.id_for_label }}_errors">{{ form.title.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.content.id_for_label }}" class="form-label">Содержание:</label>
+            {{ form.content }}
+            {% if form.content.errors %}
+                <div class="error" aria-describedby="{{ form.content.id_for_label }}_errors">{{ form.content.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.date.id_for_label }}" class="form-label">Дата:</label>
+            {{ form.date }}
+            {% if form.date.errors %}
+                <div class="error" aria-describedby="{{ form.date.id_for_label }}_errors">{{ form.date.errors }}</div>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить новость</button>
+        <a href="{% url 'news_list' %}" class="btn btn-secondary">Перейти к списку новостей</a>
+    </form>
+</section>
+
+{% if success_message %}
+    <div class="alert alert-success mt-3" role="alert">
+        Новость успешно добавлена!
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block styles %}
+<style>
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-label {
+        font-weight: bold;
+    }
+    .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+</style>
+{% endblock %}

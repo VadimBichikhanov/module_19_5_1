@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block pagename %}Records Created{% endblock %}
+
+{% block content %}
+<h2 class="text-success" aria-label="Успешное создание записей">Records Created Successfully</h2>
+<p class="lead" aria-label="Покупатели и игры были созданы и связаны">Buyers and Games have been created and linked.</p>
+
+{% if messages %}
+    <div class="messages mt-3">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}
